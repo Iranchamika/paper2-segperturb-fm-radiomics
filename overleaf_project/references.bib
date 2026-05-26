@@ -1,0 +1,226 @@
+% =====================================================================
+% references.bib — Paper 2 (segmentation-perturbation FM vs radiomics)
+% Conventions:
+%   - Author-year keys for framework / methods refs (e.g., lambin2017).
+%   - First entry is the LIDC-IDRI cohort source; subsequent entries
+%     group by the role they play in the paper (dataset, FM, statistical
+%     method, comparator paper, reporting standard).
+%   - Every reference cited at least once in the manuscript; orphans
+%     pruned at submission time.
+% =====================================================================
+
+% --- DATASET ---
+@article{armato2011,
+  title   = {The {Lung Image Database Consortium (LIDC)} and {Image Database Resource Initiative (IDRI)}: a completed reference database of lung nodules on {CT} scans},
+  author  = {Armato, Samuel G III and McLennan, Geoffrey and Bidaut, Luc and McNitt-Gray, Michael F and Meyer, Charles R and Reeves, Anthony P and Zhao, Binsheng and Aberle, Denise R and Henschke, Claudia I and Hoffman, Eric A and Kazerooni, Ella A and MacMahon, Heber and van Beek, Edwin J R and Yankelevitz, David and others},
+  journal = {Medical Physics},
+  volume  = {38},
+  number  = {2},
+  pages   = {915--931},
+  year    = {2011}
+}
+
+@article{clark2013,
+  title   = {The {Cancer Imaging Archive (TCIA)}: maintaining and operating a public information repository},
+  author  = {Clark, Kenneth and Vendt, Bruce and Smith, Kirk and Freymann, John and Kirby, Justin and Koppel, Paul and Moore, Stephen and Phillips, Stanley and Maffitt, David and Pringle, Michael and Tarbox, Lawrence and Prior, Fred},
+  journal = {Journal of Digital Imaging},
+  volume  = {26},
+  number  = {6},
+  pages   = {1045--1057},
+  year    = {2013}
+}
+
+@misc{hancock2016pylidc,
+  title        = {pylidc: an object-relational mapping for the {LIDC-IDRI} dataset},
+  author       = {Hancock, Matthew C and Magnan, Jerry F},
+  howpublished = {\url{https://pylidc.github.io}},
+  year         = {2016}
+}
+
+% --- FLEISCHNER CLINICAL THRESHOLD (motivates 6 mm diameter floor) ---
+@article{macmahon2017,
+  title   = {Guidelines for management of incidental pulmonary nodules detected on {CT} images: from the {Fleischner Society 2017}},
+  author  = {MacMahon, Heber and Naidich, David P and Goo, Jin Mo and Lee, Kyung Soo and Leung, Ann N C and Mayo, John R and Mehta, Atul C and Ohno, Yoshiharu and Powell, Charles A and Prokop, Mathias and Rubin, Geoffrey D and Schaefer-Prokop, Cornelia M and Travis, William D and Van Schil, Paul E and Bankier, Alexander A},
+  journal = {Radiology},
+  volume  = {284},
+  number  = {1},
+  pages   = {228--243},
+  year    = {2017}
+}
+
+% --- IBSI-ALIGNED HANDCRAFTED RADIOMICS ---
+@article{lambin2017,
+  title   = {Radiomics: the bridge between medical imaging and personalized medicine},
+  author  = {Lambin, Philippe and Leijenaar, Ralph T H and Deist, Timo M and Peerlings, Jurgen and de Jong, Evelyn E C and van Timmeren, Janna and Sanduleanu, Sebastian and Larue, Ruben T H M and Even, Aniek J G and Jochems, Arthur and van Wijk, Yvonka and Woodruff, Henry and van Soest, Johan and Lustberg, Tim and Roelofs, Erik and van Elmpt, Wouter and Dekker, Andre and Mottaghy, Felix M and Wildberger, Joachim E and Walsh, Sean},
+  journal = {Nature Reviews Clinical Oncology},
+  volume  = {14},
+  number  = {12},
+  pages   = {749--762},
+  year    = {2017}
+}
+
+@article{zwanenburg2020,
+  title   = {The {Image Biomarker Standardization Initiative}: standardized quantitative radiomics for high-throughput image-based phenotyping},
+  author  = {Zwanenburg, Alex and Valli{\`e}res, Martin and Abdalah, Mahmoud A and Aerts, Hugo J W L and Andrearczyk, Vincent and Apte, Aditya and Ashrafinia, Saeed and Bakas, Spyridon and Beukinga, Roelof J and Boellaard, Ronald and others},
+  journal = {Radiology},
+  volume  = {295},
+  number  = {2},
+  pages   = {328--338},
+  year    = {2020}
+}
+
+@article{vangriethuysen2017,
+  title   = {Computational radiomics system to decode the radiographic phenotype},
+  author  = {van Griethuysen, Joost J M and Fedorov, Andriy and Parmar, Chintan and Hosny, Ahmed and Aucoin, Nicole and Narayan, Vivek and Beets-Tan, Regina G H and Fillion-Robin, Jean-Christophe and Pieper, Steve and Aerts, Hugo J W L},
+  journal = {Cancer Research},
+  volume  = {77},
+  number  = {21},
+  pages   = {e104--e107},
+  year    = {2017}
+}
+
+% --- ICC-FILTER CONVENTION IN RADIOMICS ---
+@article{pavic2018,
+  title   = {Influence of inter-observer delineation variability on radiomics stability in different tumor sites},
+  author  = {Pavic, Matea and Bogowicz, Marta and Wurms, Xenia and Glatz, Stefan and Finazzi, Tobias and Riesterer, Oliver and Roesch, Johannes and Tanadini-Lang, Stephanie and Veit-Haibach, Patrick and Huellner, Martin and Bedke, J and Hutmacher, Klaus and Studer, Gabriela and Guckenberger, Matthias},
+  journal = {Acta Oncologica},
+  volume  = {57},
+  number  = {8},
+  pages   = {1070--1074},
+  year    = {2018}
+}
+
+@article{vantimmeren2020,
+  title   = {Radiomics in medical imaging --- ``how-to'' guide and critical reflection},
+  author  = {van Timmeren, Janna E and Cester, Davide and Tanadini-Lang, Stephanie and Alkadhi, Hatem and Baessler, Bettina},
+  journal = {Insights into Imaging},
+  volume  = {11},
+  number  = {1},
+  pages   = {91},
+  year    = {2020}
+}
+
+% --- LIDC INTER-READER DICE BASELINE ---
+@article{kalpathycramer2016,
+  title   = {Quantitative Imaging Network: data sharing and competitive algorithm validation leveraging The Cancer Imaging Archive},
+  author  = {Kalpathy-Cramer, Jayashree and Freymann, John B and Kirby, Justin S and Kinahan, Paul E and Prior, Fred W},
+  journal = {Translational Oncology},
+  volume  = {7},
+  number  = {1},
+  pages   = {147--152},
+  year    = {2014}
+}
+
+% --- FOUNDATION MODELS ---
+@article{pai2024,
+  title   = {Foundation model for cancer imaging biomarkers},
+  author  = {Pai, Suraj and Bontempi, Dennis and Hadzic, Ibrahim and Prudente, Vasco and Soka{\v{c}}, Mateo and Chaunzwa, Tafadzwa L and Bernatz, Simon and Hosny, Ahmed and Mak, Raymond H and Birkbak, Nicolai J and Aerts, Hugo J W L},
+  journal = {Nature Machine Intelligence},
+  volume  = {6},
+  pages   = {354--367},
+  year    = {2024},
+  doi     = {10.1038/s42256-024-00807-9}
+}
+
+@misc{zhang2024biomedclip,
+  title        = {{BiomedCLIP}: a multimodal biomedical foundation model pretrained from fifteen million scientific image-text pairs},
+  author       = {Zhang, Sheng and Xu, Yanbo and Usuyama, Naoto and Xu, Hanwen and Bagga, Jaspreet and Tinn, Robert and Preston, Sam and Rao, Rajesh and Wei, Mu and Valluri, Naveen and Wong, Cliff and Tupini, Andrea and Wang, Yu and Mazzola, Matt and Shukla, Swadheen and Liden, Lars and Gao, Jianfeng and Lungren, Matthew P and Naumann, Tristan and Wang, Sheng and Poon, Hoifung},
+  howpublished = {arXiv:2303.00915},
+  year         = {2024}
+}
+
+@article{mei2022radimagenet,
+  title   = {{RadImageNet}: an open radiologic deep learning research dataset for effective transfer learning},
+  author  = {Mei, Xueyan and Liu, Zelong and Robson, Philip M and Marinelli, Brett and Huang, Mingqian and Doshi, Amish and Jacobi, Adam and Cao, Chendi and Link, Katherine E and Yang, Thomas and Wang, Ying and Greenspan, Hayit and Deyer, Timothy and Fayad, Zahi A and Yang, Yang},
+  journal = {Radiology: Artificial Intelligence},
+  volume  = {4},
+  number  = {5},
+  pages   = {e210315},
+  year    = {2022}
+}
+
+@article{ma2024medsam,
+  title   = {Segment anything in medical images},
+  author  = {Ma, Jun and He, Yuting and Li, Feifei and Han, Lin and You, Chenyu and Wang, Bo},
+  journal = {Nature Communications},
+  volume  = {15},
+  pages   = {654},
+  year    = {2024}
+}
+
+% --- COMPARATOR / CONTEMPORANEOUS WORK ---
+@misc{cosma2025,
+  title        = {Segmentation variability and radiomics stability for predicting Triple-Negative Breast Cancer subtype using Magnetic Resonance Imaging},
+  author       = {Cosma, Isabella and others},
+  howpublished = {arXiv:2504.01692},
+  year         = {2025}
+}
+
+% --- STATISTICAL METHODS ---
+@article{koo2016icc,
+  title   = {A guideline of selecting and reporting intraclass correlation coefficients for reliability research},
+  author  = {Koo, Terry K and Li, Mae Y},
+  journal = {Journal of Chiropractic Medicine},
+  volume  = {15},
+  number  = {2},
+  pages   = {155--163},
+  year    = {2016}
+}
+
+@article{vallat2018pingouin,
+  title   = {Pingouin: statistics in {Python}},
+  author  = {Vallat, Raphael},
+  journal = {Journal of Open Source Software},
+  volume  = {3},
+  number  = {31},
+  pages   = {1026},
+  year    = {2018}
+}
+
+@book{hosmer2013,
+  title     = {Applied Logistic Regression},
+  author    = {Hosmer, David W and Lemeshow, Stanley and Sturdivant, Rodney X},
+  publisher = {Wiley},
+  edition   = {3rd},
+  year      = {2013}
+}
+
+@article{delong1988auc,
+  title   = {Comparing the areas under two or more correlated receiver operating characteristic curves: a nonparametric approach},
+  author  = {DeLong, Elizabeth R and DeLong, David M and Clarke-Pearson, Daniel L},
+  journal = {Biometrics},
+  volume  = {44},
+  number  = {3},
+  pages   = {837--845},
+  year    = {1988}
+}
+
+% --- REPORTING STANDARDS ---
+@article{mongan2020claim,
+  title   = {Checklist for {Artificial Intelligence in Medical Imaging (CLAIM)}: a guide for authors and reviewers},
+  author  = {Mongan, John and Moy, Linda and Kahn, Charles E Jr},
+  journal = {Radiology: Artificial Intelligence},
+  volume  = {2},
+  number  = {2},
+  pages   = {e200029},
+  year    = {2020}
+}
+
+@article{collins2024tripod,
+  title   = {{TRIPOD+AI} statement: updated guidance for reporting clinical prediction models that use regression or machine learning methods},
+  author  = {Collins, Gary S and Moons, Karel G M and Dhiman, Paula and Riley, Richard D and Beam, Andrew L and Van Calster, Ben and Ghassemi, Marzyeh and Liu, Xiaoxuan and Reitsma, Johannes B and van Smeden, Maarten and Boulesteix, Anne-Laure and Camaradou, Jennifer Catherine and Celi, Leo Anthony and Denaxas, Spiros and Denniston, Alastair K and Glocker, Ben and Golub, Robert M and Harvey, Hugh and Heinze, Georg and others},
+  journal = {BMJ},
+  volume  = {385},
+  pages   = {e078378},
+  year    = {2024}
+}
+
+@article{wolff2019probast,
+  title   = {{PROBAST}: a tool to assess the risk of bias and applicability of prediction model studies},
+  author  = {Wolff, Robert F and Moons, Karel G M and Riley, Richard D and Whiting, Penny F and Westwood, Marie and Collins, Gary S and Reitsma, Johannes B and Kleijnen, Jos and Mallett, Susan},
+  journal = {Annals of Internal Medicine},
+  volume  = {170},
+  number  = {1},
+  pages   = {51--58},
+  year    = {2019}
+}

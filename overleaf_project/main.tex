@@ -1,0 +1,100 @@
+%% Paper 2 — Medical Physics submission
+%% Standalone-compilable LaTeX manuscript. Built 2026-05-25 against the
+%% Paper 1 Overleaf template style (preamble cloned verbatim with one
+%% Medical Physics adjustment: target journal class swap noted below).
+%% At submission, replace the article class with the AAPM/Wiley Medical
+%% Physics LaTeX class once the editor sends the template package.
+
+\documentclass[11pt,a4paper]{article}
+
+% --- Packages (cloned from Paper 1 main.tex preamble for consistency) ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+\usepackage{cite}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{longtable}
+\usepackage{lineno}
+
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{1em}{}
+
+% Float placement and line-breaking patches (lifted from Paper 1)
+\usepackage{float}
+\setlength{\emergencystretch}{3em}
+\hyphenpenalty=10
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\onehalfspacing
+
+% Line numbers for reviewer convenience (Medical Physics submission requirement)
+\linenumbers
+
+% Custom column types
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+
+% --- Title and authors ---
+\title{\bfseries Segmentation-perturbation propagation in pretrained foundation-model embeddings versus IBSI-aligned radiomics for lung-nodule malignancy classification on the LIDC-IDRI cohort}
+
+\author[1]{W.~A.~I.~C.~Kumarananda\thanks{Corresponding author: iran.wanniarachchige@student.adelaide.edu.au}}
+\affil[1]{Independent Researcher, Adelaide, South Australia, Australia}
+
+\date{}
+
+\begin{document}
+
+\maketitle
+
+% --- Abstract (external file, humanised) ---
+\input{abstract.tex}
+
+% --- 1. Introduction ---
+\section{Introduction}
+\input{introduction.tex}
+
+% --- 2. Methods ---
+\section{Methods}
+\input{methods.tex}
+
+% --- 3. Results ---
+\section{Results}
+\input{results.tex}
+
+% --- 4. Discussion ---
+\section{Discussion}
+\input{discussion.tex}
+
+% --- 5. Conclusions ---
+\section{Conclusions}
+\input{conclusions.tex}
+
+% --- Backmatter ---
+\section*{Acknowledgements}
+The author acknowledges the TCIA/LIDC-IDRI consortium~\cite{armato2011,clark2013} for public release of the imaging cohort and the BiomedCLIP team~\cite{zhang2024biomedclip} for open release of pretrained weights. AI-assisted manuscript preparation: Anthropic Claude was used for literature triage, protocol drafting and grammar polishing; all final analytical decisions, code, and manuscript wording are the author's responsibility. Disclosed per COPE 2024 guidance and the \emph{Medical Physics} 2026 AI-use policy.
+
+\section*{Conflict of interest}
+None to declare.
+
+\section*{Data availability}
+Code, parameter files, extracted feature tables, and per-fold out-of-fold predictions are available at \url{https://github.com/Iranchamika/paper2-segperturb-fm-radiomics}. The underlying imaging data are publicly available from TCIA under the LIDC-IDRI Collection~\cite{armato2011}.
+
+% --- References ---
+\bibliographystyle{vancouver}
+\bibliography{references}
+
+\end{document}

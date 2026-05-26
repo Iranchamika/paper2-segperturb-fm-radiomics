@@ -1,0 +1,35 @@
+name: paper2
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  # Pinned to 3.9 because pyradiomics ships no Windows wheel for any version
+  # newer than cp39 (verified 2026-05-21: PyPI tops out at pyradiomics-3.1.0-cp39
+  # on win_amd64; conda-forge has no Windows builds at all). Source build of
+  # pyradiomics 3.0.1 fails under PEP 517 isolation because setup.py imports
+  # numpy at build time. Switching to py39 unlocks prebuilt wheels.
+  - python=3.9
+  - pip
+  - pip:
+      - numpy==1.26.4
+      - pandas==2.2.2
+      - scipy==1.12.0   # 1.13+ requires Python 3.10+; 1.12 is last cp39-compatible release
+      - scikit-learn==1.5.0
+      - matplotlib==3.9.0
+      - seaborn==0.13.2
+      - SimpleITK==2.3.1
+      - pydicom==2.4.4
+      - nibabel==5.2.1
+      - pyradiomics==3.1.0   # last Windows wheel (cp39). No cp310/cp311 wheel exists on PyPI for any pyradiomics version. IBSI-aligned. See python=3.9 pin above.
+      - pingouin==0.5.4
+      - lightgbm==4.3.0
+      - pyarrow==16.1.0
+      - tqdm==4.66.4
+      - torch==2.3.0
+      - torchvision==0.18.0
+      - open_clip_torch==2.24.0
+      - huggingface-hub==0.23.0
+      - transformers==4.41.0
+      - pylidc==0.2.3
+      - requests==2.32.3
+      - PyYAML==6.0.1

@@ -1,0 +1,7 @@
+% Conclusions — Paper 2, Medical Physics submission
+% Humanised v1, 2026-05-25. Two short paragraphs designed to be
+% cite-extractable. Formal-academic-active register, citation-bound.
+
+Pretrained foundation-model embeddings and IBSI-aligned handcrafted radiomic features exhibit comparably stable feature pools under controlled segmentation-mask perturbation, but the distribution of that stability differs substantially: handcrafted radiomics is bimodal, with a large excellent-stratum core and a small unstable tail, whereas BiomedCLIP is unimodal-moderate, with no catastrophically unstable dimensions. Routine ICC-based stability filtering --- the standard practice in the handcrafted-radiomics community~\cite{pavic2018,vantimmeren2020} --- was confirmed as unnecessary for downstream discrimination in both paradigms, but was found to substantially improve probability calibration for the foundation-model arm.
+
+The apparent aggregate AUC superiority of handcrafted radiomics over BiomedCLIP in our cohort was largely attributable to a structural size-malignancy confound endemic to LIDC-IDRI and did not persist within size-matched strata. Future foundation-model-versus-radiomics benchmarks should report per-dimension stability metrics, size-stratified AUC, and probability calibration alongside aggregate discrimination, and ICC-based dimension selection should be considered for any foundation-model deployment pipeline that produces probability outputs.

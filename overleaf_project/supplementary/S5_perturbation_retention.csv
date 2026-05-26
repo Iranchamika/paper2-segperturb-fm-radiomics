@@ -1,0 +1,18 @@
+perturbation_tag,n_nodules_total,n_nodules_retained,retention_pct,description
+consensus,353,353,100.0,per-voxel majority vote across available reader masks
+R1,353,353,100.0,reader 1 segmentation (always present)
+R2,353,353,100.0,reader 2 segmentation (always present)
+R3,353,353,100.0,reader 3 segmentation (always present)
+R4,353,230,65.2,reader 4 segmentation (present where >=4 readers; the rest had 3)
+R5,353,2,0.6,reader 5 (rare; pylidc clustered >=5 annotations on this nodule)
+R6,353,1,0.3,reader 6 (rare)
+R7,353,1,0.3,reader 7 (rare)
+E1,353,171,48.4,erosion radius 1 voxel; 182 nodules skipped by 25% volume-preservation guard
+E2,353,45,12.7,erosion radius 2 voxels; 308 nodules skipped by guard
+E3,353,6,1.7,erosion radius 3 voxels; 347 nodules skipped by guard
+D1,353,353,100.0,dilation radius 1 voxel
+D2,353,353,100.0,dilation radius 2 voxels
+T1,353,353,100.0,"translation by (1, 0, 0) voxels"
+T2,353,353,100.0,"translation by (0, 1, 0) voxels"
+T3,353,353,100.0,"translation by (1, 1, 0) voxels"
+DC,353,353,100.0,Dice-calibrated synthetic mask anchored to each nodule's median pairwise reader Dice

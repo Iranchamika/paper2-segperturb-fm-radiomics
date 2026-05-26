@@ -1,0 +1,21 @@
+featureClass:
+  firstorder: []
+  glcm: []
+  gldm: []
+  glrlm: []
+  glszm: []
+  ngtdm: []
+  shape: []
+imageType:
+  Original: {}
+setting:
+  binWidth: 25
+  geometryTolerance: 0.0001
+  interpolator: sitkBSpline
+  label: 1
+  padDistance: 5
+  resampledPixelSpacing:
+  - 1.0
+  - 1.0
+  - 1.0
+  weightingNorm: null

@@ -1,0 +1,95 @@
+# =====================================================================
+# .gitignore for the Paper 2 (FM-vs-radiomics) repository
+# =====================================================================
+# Goals:
+#   1. NEVER push LIDC-IDRI DICOMs or derived imaging artefacts. The
+#      raw cohort is ~60 GB and is governed by the TCIA Data Use
+#      Agreement — re-distribution from a third-party repository is not
+#      permitted. Users must download from TCIA directly.
+#   2. NEVER push foundation-model weights (BiomedCLIP, RadImageNet).
+#      These have their own licensing and download paths; we cache them
+#      locally but don't redistribute.
+#   3. NEVER push large intermediate parquets (feature tables, embeddings)
+#      that are regenerable by re-running the pipeline. The reproducibility
+#      contract is "run the code, get the same numbers" — we don't need
+#      the numbers themselves in the repo.
+#   4. DO push: code/, overleaf_project/, decisions.log, the small CSVs in
+#      results/ that are summary tables (icc_table.csv, downstream_metrics*.csv).
+# =====================================================================
+
+# ------- Data: NEVER COMMIT -------
+data/raw/
+data/processed/
+data/perturbations/
+data/*.csv
+!data/.gitkeep
+
+# ------- Models: NEVER COMMIT -------
+models/biomedclip/
+models/radimagenet/
+*.pt
+*.pth
+*.safetensors
+*.bin
+
+# ------- Results: commit summary CSVs, skip the large parquets -------
+results/*.parquet
+results/*.cache
+results/*.tmp
+
+# ------- HuggingFace cache (sometimes lives inside the project) -------
+.cache/
+.huggingface/
+
+# ------- Python / conda -------
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+.venv/
+venv/
+env/
+
+# ------- LaTeX build artefacts -------
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+*.dvi
+*.lof
+*.lot
+
+# ------- OS files -------
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ------- IDE files -------
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ------- Project-specific working files -------
+# Cowork session artefacts
+local_*/
+sessions/
+*.cowork
+
+# Build artefacts from the OSF upload pass
+overleaf_project/Paper2_v1.zip
+
+# Decision-process working notes (keep the canonical decisions.log)
+PHASE*_RECONCILIATION_*.md
+PRE_SUBMISSION_LAYOUT_TODO.md
+
+# Empty placeholder
+.placeholder

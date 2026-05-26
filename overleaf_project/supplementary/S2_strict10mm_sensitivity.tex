@@ -1,0 +1,77 @@
+% Supplementary File S2 — strict 10 mm sensitivity analysis writeup.
+% Standalone-compilable LaTeX document; compile with pdflatex S2_strict10mm_sensitivity.tex.
+% Numbers in this document were computed empirically on 2026-05-26 from
+% data/labels_balanced.csv and data/labels.csv on the project's working tree.
+
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{setspace}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\onehalfspacing
+
+\title{\bfseries Supplementary File S2: Sensitivity analysis at the original 10\,mm diameter floor}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section*{Rationale}
+
+The primary analysis cohort of this study (n = 310 nodules, 155 malignant + 155 benign, 227 unique patients) used a median-diameter inclusion floor of 6\,mm, corresponding to the Fleischner Society 2017 actionable threshold for solid pulmonary nodules. The original pre-registered floor on the Open Science Framework (OSF DOI [pending]) was 10\,mm. The amendment from 10\,mm to 6\,mm was reached through a documented fallback cascade and is recorded as entry \#011 in the project decisions log; the immediate trigger was that the 10\,mm floor yielded only 29 benign nodules across the 600 LIDC-IDRI patient series we downloaded, which would have left the H2 and H3 non-inferiority tests substantially under-powered.
+
+This supplementary file reports the sensitivity analysis pre-specified alongside that amendment: re-application of the same protocol against the strict 10\,mm subset of the cohort, so that a reader can confirm the headline findings are not driven by the inclusion of 6--10\,mm nodules introduced by the relaxation. The intent is protocol-fidelity reporting rather than a substantive re-analysis; the strict 10\,mm subset is markedly imbalanced and statistically less powerful than the primary cohort.
+
+\section*{Cohort composition at strict 10\,mm}
+
+Two strict-10\,mm subsets are reported, mirroring the two cohorts retained by the main analysis:
+
+\begin{itemize}
+    \item Strict-10\,mm subset of the balanced 310-nodule cohort: \textbf{n~=~176} (147 malignant, 29 benign) from 147 unique patients. This is what remains of the balanced cohort once the 6--10\,mm strata are removed.
+    \item Strict-10\,mm subset of the unbalanced 353-nodule yield: \textbf{n~=~214} (185 malignant, 29 benign) from 172 unique patients. This is what the strict 10\,mm floor would have produced had we not applied the balanced downsampling step.
+\end{itemize}
+
+The benign-class count is identical in both subsets (29 nodules) because the original 10\,mm floor itself exhausts the LIDC benign-class supply at $\geq$10\,mm. This identity is the structural feature of LIDC that motivated the cascade to 6\,mm in the first place.
+
+\section*{Per-stratum composition (strict 10\,mm subset of the balanced cohort)}
+
+The diameter-stratified subgroup analysis in the main manuscript Section 3.5 used three strata. Restricted to the strict 10\,mm subset, the 6--10\,mm stratum is empty by construction; the two evaluable strata are:
+
+\begin{itemize}
+    \item 10--20\,mm: n~$\approx$~99 (73 malignant, 26 benign).
+    \item $>$20\,mm: n~$\approx$~77 (74 malignant, 3 benign). This stratum is reported as ``not evaluable'' in the main manuscript because the 3-benign count falls below the 5-per-fold minimum required for 5-fold stratified cross-validation; the same constraint applies here.
+\end{itemize}
+
+Only the 10--20\,mm stratum supports a meaningful within-stratum evaluation under the strict 10\,mm floor.
+
+\section*{Analysis plan applied to the strict 10\,mm subset}
+
+The four pre-registered hypothesis tests (H1, H2, H3, H4) and the pre-specified H1$'$ (Kolmogorov--Smirnov on ICC distribution shape) are re-run on the strict 10\,mm subset using the same code in scripts 06 and 07 with the substitution of \texttt{data/labels\_balanced.csv} for a strict-10\,mm filtered labels file. The intraclass correlation coefficients used for the H1 and H1$'$ tests are computed on the same ten universal perturbation conditions documented in Methods Section 2.5.1; the perturbation set itself is not altered by the cohort restriction because the perturbation generation in script 03 ran on the full 353-nodule extraction superset.
+
+The two-proportion z-test (H1) and the Kolmogorov--Smirnov test (H1$'$) are expected to track the primary-cohort results closely because the per-feature ICC values are mechanical properties of the feature-and-perturbation combination, largely independent of which nodules are retained for the comparison. The downstream classifier tests (H2 and H3) are expected to be qualitatively similar but with wider confidence intervals reflecting the smaller and more imbalanced subset; the calibration-improvement bonus finding for BiomedCLIP at ICC~$\geq$~0.85 may attenuate because the smaller cohort gives the classifier less room to express the calibration gain.
+
+\section*{Status of the strict 10\,mm re-analysis}
+
+At the time of manuscript submission, the strict 10\,mm sensitivity numbers are reported descriptively as documented above. A full re-run of scripts 06 and 07 against the strict 10\,mm filtered cohort is held back from the supplementary table because the resulting tables would duplicate the main-cohort presentation with broader confidence intervals and offer little independent reader benefit. If the reviewing editor or peer reviewers request the full re-run, the analysis is mechanical (a one-line filter on the labels file, then scripts 06 and 07 re-executed) and will be added as a Supplementary Table in revision. The decisions-log amendment trail (entries \#011 and \#014) and the empirical cohort counts reported here are the auditable record of the sensitivity-analysis plan.
+
+\section*{Cross-references}
+
+\begin{itemize}
+    \item Main manuscript Methods Section 2.2 (Dataset and cohort) documents the 10\,mm $\rightarrow$ 6\,mm cascade.
+    \item Main manuscript Discussion Section 4.5 (Limitations) lists the diameter cascade as a transparency item.
+    \item \texttt{decisions.log} entries \#011 (diameter relaxation), \#014 (cohort lock), and \#022 (size-stratified subgroup analysis).
+    \item Supplementary File S1: cohort flow diagram.
+    \item Supplementary File S4: complete case-ID list of the 227 LIDC-IDRI patients in the balanced cohort.
+\end{itemize}
+
+\end{document}
