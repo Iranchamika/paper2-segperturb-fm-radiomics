@@ -87,6 +87,12 @@ sessions/
 # Build artefacts from the OSF upload pass
 overleaf_project/Paper2_v1.zip
 
+# Stray Overleaf/LaTeX temp files (the *.synctex.gz / *.fdb_latexmk / *.fls
+# patterns above already cover most of these; these are the extras specific
+# to Overleaf working state)
+overleaf_project/ziPU92SE
+overleaf_project/_minted-*/
+
 # Decision-process working notes (keep the canonical decisions.log)
 PHASE*_RECONCILIATION_*.md
 PRE_SUBMISSION_LAYOUT_TODO.md
