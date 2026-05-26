@@ -415,4 +415,61 @@ The archived OSF Registration at `osf.io/9kt3c` (DOI 10.17605/OSF.IO/9KT3C) is i
 
 ---
 
-*Next entry will be #025.*
+## #025 — 2026-05-26 — RadImageNet pipeline executed under Plan A; silent state-dict no-load bug caught by audit and corrected
+
+**Trigger.** External-dependency hold on RadImageNet weight access (logged in #018) resolved on 2026-05-26 after the user noted that the RadImageNet PyTorch weights are openly downloadable from the BMEII-AI Google Drive — only the underlying 1.35-million-image training dataset is gated behind the Google Form, not the pretrained model artefacts. The Plan B (MedSAM substitution) and Plan C (BiomedCLIP-only) branches of #018 were therefore never reached; Plan A executed directly. This entry also documents the correction to the gating assumption in #018: the assumed Google-Form gating was wrong for the model weights and the contingency tree should have been built around an audit of the actual access procedure rather than an assumed one.
+
+**Plan A first run (random-init weights, INVALID — superseded).** The user downloaded `RadImageNet_pytorch.zip` (186 MB) from `https://drive.google.com/file/d/1RHt2GnuOYlc_gcoTETtBDSW73mFyRAtR/view?usp=sharing`, extracted it, and copied `ResNet50.pt` to the protocol-expected path `models/radimagenet/RadImageNet-ResNet50_notop.pt`. The full pipeline (scripts 05 to 08) was re-run with `--fm radimagenet` and completed cleanly in approximately 57 minutes wall-clock. The headline numbers from this first run appeared dramatic: 1 724 of 2 048 RadImageNet dimensions (84 percent) reached the Koo and Li (2016) "excellent" reliability threshold, while downstream classification AUC was only 0.747 (0.776 after ICC filtering at 0.85), with a within-stratum AUC of 0.384 in the 6 to 10 millimetre band — apparent strong evidence for a "perturbation stability decoupled from task informativeness" narrative.
+
+**The audit, and what it caught.** Per the verification protocol codified in #024, three diagnostic checks were run before committing to the narrative: (a) per-dimension variance across nodules and across perturbations; (b) per-stratum sample counts and bootstrap CI bounds; and (c) state-dict load report against `torchvision.models.resnet50(weights=None)`. Check (c) was dispositive. `load_state_dict(state, strict=False)` reported 318 of 318 state-dict keys as "unexpected" and 267 of 320 model parameters as "missing" — meaning that zero of the saved RadImageNet weights were actually loaded into the model. The network ran inference for 3 989 image-mask pairs using PyTorch's default Kaiming-uniform random initialisation throughout. The 84 percent "excellent ICC" was an artefact of random features producing deterministically consistent random outputs under deterministic preprocessing; the 0.384 within-stratum AUC was a small-sample anti-correlation between random features and the malignancy label.
+
+**Root cause.** The RadImageNet PyTorch port stores weights in `nn.Sequential` indexing (keys like `backbone.0.weight`, `backbone.1.weight`, `backbone.4.0.conv1.weight` through `backbone.7.*`). `torchvision.models.resnet50` uses named attributes (`conv1.weight`, `bn1.weight`, `layer1.0.conv1.weight` through `layer4.*`). `load_state_dict(state, strict=False)` is the standard "tolerant load" pattern but silently accepts a complete key-name mismatch as a no-op load. The original `05_extract_fm_embeddings.py` used `strict=False` defensively to tolerate the omitted `fc` weights (the script replaces `fc` with `nn.Identity` for feature extraction), but the same tolerance also masked the structural mismatch.
+
+**Fix.** `load_radimagenet()` patched to (a) apply a rename map (`backbone.0.→conv1.`, `backbone.1.→bn1.`, `backbone.4.→layer1.`, `backbone.5.→layer2.`, `backbone.6.→layer3.`, `backbone.7.→layer4.`); (b) drop any unmapped keys with a warning log line rather than silently ignoring them; (c) drop any `fc.*` keys post-rename, since `fc` is replaced with `Identity`; (d) load with `strict=True` so any remaining structural mismatch fails loudly; (e) assert `model.conv1.weight.abs().mean() > 0.05` as a lower-bound sanity check that random Kaiming-uniform init has been overwritten. The originally drafted upper bound (`< 0.20`) and the layer4-versus-conv1 shrinkage ratio were removed after side-by-side comparison against ImageNet-pretrained and random-init ResNet50 showed that RadImageNet's PyTorch port has unusual flat-across-depth magnitudes around 0.25 at every layer — likely a Keras-to-PyTorch conversion artefact absorbing BatchNorm scale into convolutional weights, not a load failure. Functional validation by cosine separability confirmed the trained-weight signature: cosine similarity between embeddings of two different LIDC images is 0.997 for RadImageNet (trained, somewhat collapsed), 0.992 for ImageNet (well-discriminated), and 0.9998 for random init (collapsed). RadImageNet is clearly trained — just scaled unusually.
+
+**Plan A second run (corrected weights, AUTHORITATIVE).** The full pipeline (scripts 05 to 08) was re-run with the patched loader and completed cleanly in approximately 50 minutes wall-clock. The state-dict load reported 318 of 318 parameters loaded under `strict=True`; the `conv1.weight.abs().mean()` assertion passed at 0.248. The corrected numbers:
+
+ICC stratum distribution by paradigm:
+
+| Paradigm     | excellent | good | moderate | poor | NA | % stable (≥ 0.75) |
+|--------------|-----------|------|----------|------|----|--------------------|
+| biomedclip   | 1         | 462  | 49       | 0    | 0  | 90.4              |
+| radiomics-2d | 69        | 24   | 8        | 1    | 0  | 91.2              |
+| radiomics-3d | 67        | 34   | 5        | 1    | 0  | 94.4              |
+| radimagenet  | 647       | 892  | 410      | 98   | 1  | 75.1              |
+
+Downstream AUC on pooled out-of-fold predictions:
+
+| Paradigm     | AUC (all features) | AUC (best ICC threshold) | ΔAUC under filtering |
+|--------------|--------------------|--------------------------|----------------------|
+| radiomics-3d | ~0.95              | ~0.95                    | ~0                   |
+| radiomics-2d | ~0.95              | ~0.95                    | ~0                   |
+| biomedclip   | 0.898              | 0.912 (icc ≥ 0.85)       | +0.014               |
+| radimagenet  | 0.794              | 0.817 (icc ≥ 0.90)       | +0.023               |
+
+Within-stratum AUC for RadImageNet, with bootstrap 95 percent confidence intervals and per-stratum class composition (verified 2026-05-26 against `results/downstream_metrics_by_stratum.csv`):
+
+- 6 to 10 mm: AUC 0.438 [0.254, 0.619]; n = 134 with 8 malignant (6 percent positive rate). CI spans 0.5; the stratum is class-imbalance-limited rather than paradigm-limited, and the AUC is reported as "not significantly different from chance" with the CI explicit.
+- 10 to 20 mm: AUC 0.677 [0.565, 0.793]; n = 99 with 73 malignant (74 percent positive rate). CI lower bound is 0.565, above 0.5; this is the band where real discrimination is measurable.
+- Greater than 20 mm: AUC NaN; n = 77 with 74 malignant (96 percent positive rate). The script `07b_subgroup_analysis.py` correctly returns NaN because only 3 benign cases preclude AUC computation. Reported as "insufficient class balance" in the manuscript.
+
+The diameter-stratified pattern strengthens rather than weakens the decisions.log #022 size-confound finding: within-paradigm discrimination is only meaningfully measurable in the 10-20 mm band, where class balance permits stable AUC estimation. The aggregate AUC ranking across paradigms is driven entirely by this middle band and by the structural correlation between nodule diameter and median LIDC malignancy rating that the small-and-large strata expose. This is the central methodological observation the manuscript now carries forward.
+
+**Effect on manuscript narrative.** The "stability decoupled from informativeness" framing entertained briefly between the first and second runs is invalidated. The corrected hierarchy is clean: radiomics outperforms both FMs on both axes (stability and discrimination); both FMs benefit from ICC-based stability filtering with a consistent +1.4 to +2.3 percentage-point AUC lift, while radiomics shows no meaningful change under the same filter. The within-stratum AUC collapse for RadImageNet at 6 to 10 mm requires CI verification before being reported as a sub-finding rather than as noise.
+
+**Additional methodological contribution.** The silent `strict=False` no-load failure mode is itself a publishable methodological observation. A new Discussion subsection (proposed §4.6) will document the dual structural-and-functional FM-weight validation procedure: structural verification by `strict=True` post-rename plus key-count assertion; functional verification by depth-magnitude profile comparison against ImageNet and random-init baselines and by cosine separability of test inputs. This procedure is transferable to any downstream study that loads pretrained FM weights from a community port whose key conventions may diverge from the architecture's reference implementation, and is directly responsive to the integrity context the *Nature* 2026 arXiv-ban article describes.
+
+**Files affected in the project state by this entry:**
+- `code/05_extract_fm_embeddings.py` — `load_radimagenet()` patched.
+- `code/07_downstream_classifier.py` and `code/07b_subgroup_analysis.py` — `PARADIGMS` list re-included `radimagenet` after its removal during the Plan-C scaffold.
+- `results/icc_table.csv`, `results/downstream_metrics.csv`, `results/downstream_metrics_by_stratum.csv` — regenerated with the corrected RadImageNet column (2 048 ICC rows added).
+- `results/fm_embeddings_radimagenet.parquet` — regenerated under the patched loader.
+- `figures/fig2_icc_distributions.png`, `figures/fig3_auc_forest.png` — regenerated to include the RadImageNet column.
+- `figures/fig4_stratified_auc.png` — regeneration pending verification; the agent noted the file timestamp was unchanged, which may indicate a script-08 conditional path that needs review.
+- `figures/fig1_perturbation_examples.png` — unchanged by design; depends on perturbation conditions, not on paradigm choice.
+
+**Standing protocol added by this entry.** Any future loader for a community-distributed FM checkpoint must use `strict=True` after explicit key normalisation. `strict=False` is reserved for cases where a small, named, documented subset of keys is expected to be absent (typically a classification head being replaced with `Identity`). The "tolerant load" pattern with no key inspection is now a banned default in this project.
+
+---
+
+*Next entry will be #026.*

@@ -68,6 +68,7 @@ PARADIGMS = [
     ("radiomics-3d", "radiomics_features_3d.parquet"),
     ("radiomics-2d", "radiomics_features_2d.parquet"),
     ("biomedclip", "fm_embeddings_biomedclip.parquet"),
+    ("radimagenet", "fm_embeddings_radimagenet.parquet"),
 ]
 
 # Diameter strata per decisions.log #011.

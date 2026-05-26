@@ -98,13 +98,11 @@ def fold_internal_icc_selector(df_full: pd.DataFrame, feature_cols: list, thresh
 log = get_logger("07_classifier")
 
 
-# Paradigms evaluated downstream. Add ("radimagenet", "fm_embeddings_radimagenet.parquet")
-# back to this list once the manual RadImageNet weight download is complete and
-# `python 05_extract_fm_embeddings.py --fm radimagenet` has written the parquet.
 PARADIGMS = [
     ("radiomics-3d", "radiomics_features_3d.parquet"),
     ("radiomics-2d", "radiomics_features_2d.parquet"),
     ("biomedclip", "fm_embeddings_biomedclip.parquet"),
+    ("radimagenet", "fm_embeddings_radimagenet.parquet"),
 ]
 
 
