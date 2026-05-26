@@ -1,6 +1,7 @@
 # Paper 2: Segmentation-perturbation propagation in pretrained foundation-model embeddings versus IBSI-aligned radiomics for lung-nodule malignancy classification on the LIDC-IDRI cohort
 
-[![DOI](https://img.shields.io/badge/OSF-3f76x-blue)](https://osf.io/3f76x)
+[![OSF Registration DOI](https://img.shields.io/badge/OSF%20Registration-10.17605%2FOSF.IO%2F9KT3C-blue)](https://osf.io/9kt3c)
+[![OSF Project](https://img.shields.io/badge/OSF%20Project-3f76x-lightblue)](https://osf.io/3f76x)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 Repository for the data-extraction, ICC, classifier and figure-generation code behind the manuscript of the same name (target journal: *Medical Physics*, AAPM / Wiley). Author: **W. A. I. C. Kumarananda**, Independent Researcher, Adelaide, South Australia.
@@ -45,7 +46,7 @@ A controlled-perturbation reproducibility study comparing pretrained foundation-
 │   ├── figures/                # PNG figures from script 08
 │   ├── supplementary/          # S1-S5 PDFs and CSVs
 │   ├── COVER_LETTER.md         # cover letter for Medical Physics submission
-│   ├── OSF_PREREGISTRATION.md  # pre-registration body text for osf.io/3f76x
+│   ├── OSF_PREREGISTRATION.md  # pre-registration body, archived as osf.io/9kt3c (DOI 10.17605/OSF.IO/9KT3C)
 │   └── OSF_FILL_GUIDE.md       # tab-by-tab OSF Project fill instructions
 ├── decisions.log               # append-only protocol-amendment record #001-#023
 ├── results/                    # (gitignored) feature parquets, ICC table, metrics CSVs
@@ -125,7 +126,7 @@ If you use this code or data preprocessing pipeline, please cite the manuscript 
 
 ## Pre-registration and amendments
 
-OSF pre-registration: https://osf.io/3f76x — DOI minted at the moment of registration. Five protocol amendments since initial deposit (2026-05-25) are documented in Section P of `overleaf_project/OSF_PREREGISTRATION.md` and cross-referenced from each entry in `decisions.log`.
+OSF Registration: https://osf.io/9kt3c (permanent DOI `10.17605/OSF.IO/9KT3C`, archived 2026-05-26). Associated working OSF Project: https://osf.io/3f76x. Five protocol amendments since initial deposit (2026-05-25) are documented in Section P of `overleaf_project/OSF_PREREGISTRATION.md` and cross-referenced from each entry in `decisions.log`.
 
 ## License
 

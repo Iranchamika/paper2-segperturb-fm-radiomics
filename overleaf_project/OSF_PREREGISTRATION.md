@@ -1,6 +1,8 @@
 # OSF Pre-Registration — Paper 2 (aligned to locked protocol state, 2026-05-25)
 
-**To submit / amend:** create or open the OSF project at https://osf.io. If the project is already registered, the body fields below (A through O) are the amended content for the next registration revision; the change rationale is summarised in Section P (Amendments since initial deposit). If the project has not yet been registered, paste each section into the matching OSF Standard Pre-Data Collection Registration form field. Once registered, OSF assigns a permanent DOI that the manuscript Methods §2.1 cites.
+**Registration status:** **ARCHIVED on 2026-05-26.** Registration URL: https://osf.io/9kt3c. Permanent DOI: `10.17605/OSF.IO/9KT3C`. Associated working Project: https://osf.io/3f76x. The manuscript Methods §2.1 cites the Registration DOI, not the Project URL.
+
+**To amend after submission:** OSF Registrations are immutable once archived. Subsequent protocol amendments are recorded in Section P below and additionally in the timestamped append-only `decisions.log` at the project root of the GitHub repository (https://github.com/Iranchamika/paper2-segperturb-fm-radiomics); the OSF Registration itself is not edited after archiving. If a material amendment justifies a new Registration revision, create a new Registration on the parent Project (`osf.io/3f76x`) with the amended content and reference both registration URLs in the manuscript.
 
 **Source-of-truth note:** this document supersedes `OSF_Preregistration_Template.md` (the draft from 2026-05-25). Five fields in that earlier draft no longer matched the locked state of the protocol once decisions.log entries #009, #011, #014, and #018 were applied; see Section P for the full amendments list.
 
