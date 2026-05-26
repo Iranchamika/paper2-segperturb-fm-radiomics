@@ -1,0 +1,70 @@
+# references.bib provenance log — Paper 2
+
+Every entry in `references.bib` was verified on **2026-05-26** against an
+authoritative metadata source (PubMed via NCBI E-utilities, JSTOR for the
+pre-1990 statistics paper, NEJM AI for the BiomedCLIP peer-reviewed upgrade,
+JOSS for the Pingouin software paper, Wiley for the Hosmer book, and arXiv
+for the unpublished preprint). This file exists so that any reviewer, editor,
+or subsequent author can spot-check the citation list field-by-field against
+the same authoritative URLs the verification used.
+
+Verification protocol (binding for any future bib edits):
+1. Every BibTeX field (year, volume, issue, pages, first-author surname,
+   journal name, DOI) is sourced from one of the URLs below; no field is
+   taken from the assistant's training memory.
+2. New entries added in any future revision must be appended to this log
+   with the same provenance line format and date-stamped.
+3. If an entry cannot be verified against an authoritative endpoint, it is
+   marked UNVERIFIED and held out of the bibliography pending user action,
+   not appended speculatively.
+
+The verification pass that produced this log is documented in
+`../decisions.log` entry #024 (2026-05-26).
+
+---
+
+## Verified entries
+
+| Bibtex key            | DOI                                      | Authoritative source URL                                              | Verification date |
+|-----------------------|------------------------------------------|-----------------------------------------------------------------------|-------------------|
+| armato2011            | 10.1118/1.3528204                        | https://pubmed.ncbi.nlm.nih.gov/21452728                              | 2026-05-26        |
+| clark2013             | 10.1007/s10278-013-9622-7                | https://pubmed.ncbi.nlm.nih.gov/23884657                              | 2026-05-26        |
+| hancock2016pylidc     | (no DOI — software)                      | https://pylidc.github.io                                              | 2026-05-26        |
+| macmahon2017          | 10.1148/radiol.2017161659                | https://pubmed.ncbi.nlm.nih.gov/28240562                              | 2026-05-26        |
+| zwanenburg2020        | 10.1148/radiol.2020191145                | https://pubmed.ncbi.nlm.nih.gov/32154773                              | 2026-05-26        |
+| vangriethuysen2017    | 10.1158/0008-5472.CAN-17-0339            | https://pubmed.ncbi.nlm.nih.gov/29092951                              | 2026-05-26        |
+| pavic2018             | 10.1080/0284186X.2018.1445283            | https://pubmed.ncbi.nlm.nih.gov/29513054                              | 2026-05-26        |
+| vantimmeren2020       | 10.1186/s13244-020-00887-2               | https://pubmed.ncbi.nlm.nih.gov/32785796                              | 2026-05-26        |
+| kalpathycramer2016    | 10.1593/tlo.13862                        | https://pubmed.ncbi.nlm.nih.gov/24772218                              | 2026-05-26        |
+| pai2024               | 10.1038/s42256-024-00807-9               | https://pubmed.ncbi.nlm.nih.gov/38523679                              | 2026-05-26        |
+| zhang2024biomedclip   | 10.1056/AIoa2400640                      | https://ai.nejm.org/doi/abs/10.1056/AIoa2400640                       | 2026-05-26        |
+| mei2022radimagenet    | 10.1148/ryai.210315                      | https://pubmed.ncbi.nlm.nih.gov/36204533                              | 2026-05-26        |
+| ma2024medsam          | 10.1038/s41467-024-44824-z               | https://pubmed.ncbi.nlm.nih.gov/38253604                              | 2026-05-26        |
+| cosma2025             | (no DOI — arXiv preprint)                | https://arxiv.org/abs/2504.01692                                      | 2026-05-26        |
+| koo2016icc            | 10.1016/j.jcm.2016.02.012                | https://pubmed.ncbi.nlm.nih.gov/27330520                              | 2026-05-26        |
+| vallat2018pingouin    | 10.21105/joss.01026                      | https://joss.theoj.org/papers/10.21105/joss.01026                     | 2026-05-26        |
+| hosmer2013            | 10.1002/9781118548387 (ISBN 9780470582473) | https://www.wiley.com/en-us/Applied+Logistic+Regression%2C+3rd+Edition-p-9780470582473 | 2026-05-26 |
+| delong1988auc         | 10.2307/2531595 (JSTOR archive)          | https://pubmed.ncbi.nlm.nih.gov/3203132                               | 2026-05-26        |
+| mongan2020claim       | 10.1148/ryai.2020200029                  | https://pubmed.ncbi.nlm.nih.gov/33937821                              | 2026-05-26        |
+| collins2024tripod     | 10.1136/bmj-2023-078378                  | https://pubmed.ncbi.nlm.nih.gov/38626948                              | 2026-05-26        |
+| wolff2019probast      | 10.7326/M18-1376                         | https://pubmed.ncbi.nlm.nih.gov/30596875                              | 2026-05-26        |
+
+Total: 21 entries verified. No entry is unverified or held out.
+
+## Pruned entries (intentional removal, recorded for audit)
+
+| Bibtex key | Reason for removal |
+|-----------|-------------------|
+| lambin2017 | Orphan — present in bib but not cited in any of the six manuscript .tex files. Pruned on 2026-05-26 because `zwanenburg2020` already covers the IBSI standard reference and `vangriethuysen2017` covers the PyRadiomics implementation reference; adding a third foundational radiomics review in the same sentence would not aid the reader. Source for future re-inclusion if needed: https://pubmed.ncbi.nlm.nih.gov/28975929 (PMID 28975929, DOI 10.1038/nrclinonc.2017.141). |
+
+## Upgrades on this pass
+
+| Bibtex key | Change | Rationale |
+|-----------|--------|-----------|
+| zhang2024biomedclip | Upgraded from arXiv preprint (`@misc`, arXiv:2303.00915, 2024) to peer-reviewed NEJM AI publication (`@article`, NEJM AI 2(1):AIoa2400640, DOI 10.1056/AIoa2400640, published online 2024-12-20, issue date 2025-01-01). Authors expanded to match the final NEJM AI author list (24 authors; previously 21 from the arXiv preprint). | Peer-reviewed citation strictly preferred over arXiv preprint for *Medical Physics* submission. The bibtex citekey is retained as `zhang2024biomedclip` (year reflects online publication; matches existing `\cite{}` invocations in main.tex, methods.tex, discussion.tex, introduction.tex). |
+
+## Out-of-scope citations encountered during verification
+
+None. Every `\cite{...}` invocation in the six `.tex` files resolves to a
+verified bibtex entry. There are no UNVERIFIED entries pending user input,
+and no missing citations.
