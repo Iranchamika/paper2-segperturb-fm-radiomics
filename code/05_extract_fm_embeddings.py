@@ -143,11 +143,58 @@ def load_radimagenet():
         raise FileNotFoundError(
             f"Place RadImageNet ResNet50 weights at {weights_path} (see 02_Environment_Setup.md)"
         )
+    state = torch.load(weights_path, map_location=DEVICE)
+    # The RadImageNet PyTorch port stores weights in nn.Sequential indexing
+    # (backbone.0.* through backbone.7.*). Rename to torchvision named-attribute
+    # form before load to avoid the silent-no-load bug that strict=False would mask.
+    rename_map = {
+        "backbone.0.": "conv1.",
+        "backbone.1.": "bn1.",
+        # backbone.2 = ReLU (stateless), backbone.3 = MaxPool (stateless), skipped
+        "backbone.4.": "layer1.",
+        "backbone.5.": "layer2.",
+        "backbone.6.": "layer3.",
+        "backbone.7.": "layer4.",
+    }
+    renamed = {}
+    for k, v in state.items():
+        for prefix, replacement in rename_map.items():
+            if k.startswith(prefix):
+                renamed[replacement + k[len(prefix):]] = v
+                break
+        else:
+            # Drop any keys that do not match an expected prefix (avgpool, fc, etc.)
+            # rather than silently passing them to load_state_dict
+            log.warning(f"Dropping unmapped state-dict key: {k}")
+
     model = models.resnet50(weights=None)
     model.fc = torch.nn.Identity()
-    state = torch.load(weights_path, map_location=DEVICE)
-    # RadImageNet checkpoint omits the fc weights by design — loose load OK
-    model.load_state_dict(state, strict=False)
+    # Drop fc.weight/fc.bias from renamed if present, since we replaced fc with Identity
+    renamed = {k: v for k, v in renamed.items() if not k.startswith("fc.")}
+
+    # strict=True forces structural verification; the load fails loudly if any
+    # parameter is still misaligned. The Identity replacement of fc means we
+    # never expect fc.* in the loaded dict.
+    model.load_state_dict(renamed, strict=True)
+    log.info(f"State-dict load OK (strict=True). Total params loaded: {len(renamed)}")
+
+    # Sanity check that we actually loaded trained weights, not random init.
+    # Random Kaiming init produces conv1.abs().mean() ≈ 0.02 (fan_in=147 for 7x7x3->64);
+    # any sanely-trained ResNet conv1 magnitude is at least ~0.05. We use a single
+    # lower-bound assertion. The "layer4 << conv1" pattern holds for ImageNet-trained
+    # ResNets (weight decay shrinks deep layers) but NOT for RadImageNet's PyTorch port,
+    # which has flat per-layer magnitudes around 0.25 across all depths — likely an
+    # artefact of Keras→PyTorch conversion absorbing BN scale into conv weights.
+    # We log the depth profile so anomalous loads are visible but don't gate on it.
+    conv1_mag = model.conv1.weight.abs().mean().item()
+    layer4_mag = model.layer4[0].conv1.weight.abs().mean().item()
+    log.info(
+        f"Sanity: conv1.weight.abs().mean()={conv1_mag:.4g}, "
+        f"layer4.0.conv1.weight.abs().mean()={layer4_mag:.4g} "
+        f"(ratio={layer4_mag/conv1_mag:.2f})"
+    )
+    assert conv1_mag > 0.05, f"conv1 magnitude {conv1_mag} looks like random init (<0.05)"
+
     model.eval().to(DEVICE)
     tfm = transforms.Compose(
         [
