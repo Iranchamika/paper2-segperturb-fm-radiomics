@@ -67,6 +67,13 @@ env/
 *.lof
 *.lot
 
+# Whitelist project-critical .log files that the LaTeX *.log rule would otherwise
+# swallow. Append further exceptions here if a new analytical or audit-trail .log
+# file is introduced; without an explicit exception, contributors adding a new
+# .log file would silently lose it on the next git add.
+!decisions.log
+!overleaf_project/references_provenance.log
+
 # ------- OS files -------
 .DS_Store
 Thumbs.db
