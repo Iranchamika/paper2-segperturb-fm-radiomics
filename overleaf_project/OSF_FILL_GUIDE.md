@@ -186,10 +186,10 @@ This is the step that produces the permanent DOI you cite in the manuscript Meth
 5. Below the form, OSF asks for a registration narrative. Paste **Section P** (Amendments since initial deposit) verbatim. This makes the amendments transparent on the registration record.
 6. Choose embargo: I recommend **No embargo** for an independent-researcher submission — the OSF DOI being immediately resolvable is part of the credibility signal. If you prefer to embargo until manuscript acceptance, OSF supports an embargo of up to 4 years; pick that and Medical Physics will accept the registration cite either way.
 7. Review the auto-generated preview. OSF will show you a snapshot of every file in the project at the moment of registration — this is why we want all the files in Part E uploaded BEFORE you create the registration.
-8. Click **Register**. OSF will mint a DOI of the form `10.17605/OSF.IO/XXXX`. Copy it and paste it into:
-   - `overleaf_project/main.tex` and `overleaf_project/methods.tex` — search for `OSF DOI: [pending]` and replace.
-   - `manuscript/04_Cover_Letter.md` and `overleaf_project/COVER_LETTER.md` — if you decide to cite the DOI in the cover letter (optional but a strong credibility signal for an independent-researcher submission).
-   - The GitHub repository README.
+8. Click **Register**. OSF will mint a DOI of the form `10.17605/OSF.IO/XXXX`. **DONE 2026-05-26 — Registration archived at `osf.io/9kt3c` with DOI `10.17605/OSF.IO/9KT3C`.** The DOI has been substituted into:
+   - `overleaf_project/methods.tex` line 8 (the OSF DOI placeholder in §2.1) and `overleaf_project/supplementary/S2_strict10mm_sensitivity.tex` line 31 (the strict-10mm rationale paragraph) — committed in `0013589` and the follow-up commit.
+   - `overleaf_project/OSF_PREREGISTRATION.md` header (Registration-status banner) and `README.md` (badge row plus two prose references).
+   - Cover letter — optional; consider adding the DOI string `10.17605/OSF.IO/9KT3C` to `overleaf_project/COVER_LETTER.md` in the "Pre-registration and data availability" paragraph as a final credibility signal before submission.
 
 ---
 
