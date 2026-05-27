@@ -40,8 +40,14 @@
 \setlength{\parskip}{6pt}
 \onehalfspacing
 
-% Line numbers for reviewer convenience (Medical Physics submission requirement)
-\linenumbers
+% Line numbers DISABLED for the reading/draft build.
+% To re-enable for the Medical Physics submission version (the journal requires
+% numbered lines on the submission PDF for reviewer convenience), uncomment the
+% two commands below. \modulolinenumbers[5] prints numbers only every fifth line
+% (5, 10, 15, ...) which is the conventional submission-review compromise; remove
+% it as well if every-line numbering is preferred.
+% \linenumbers
+% \modulolinenumbers[5]
 
 % Custom column types
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
@@ -60,7 +66,7 @@
 
 \maketitle
 
-% --- Abstract (external file, humanised) ---
+% --- Abstract (external file) ---
 \input{abstract.tex}
 
 % --- 1. Introduction ---

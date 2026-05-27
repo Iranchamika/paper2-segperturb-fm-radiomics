@@ -1,4 +1,4 @@
-# Cover letter — source markdown (humanized)
+# Cover letter, source markdown
 **Manuscript:** Segmentation-perturbation propagation in pretrained foundation-model embeddings versus IBSI-aligned radiomics for lung-nodule malignancy classification on the LIDC-IDRI cohort
 **Target journal:** Medical Physics (AAPM / Wiley)
 **Author:** W. A. I. C. Kumarananda

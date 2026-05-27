@@ -40,7 +40,7 @@ The verification pass that produced this log is documented in
 | zhang2024biomedclip   | 10.1056/AIoa2400640                      | https://ai.nejm.org/doi/abs/10.1056/AIoa2400640                       | 2026-05-26        |
 | mei2022radimagenet    | 10.1148/ryai.210315                      | https://pubmed.ncbi.nlm.nih.gov/36204533                              | 2026-05-26        |
 | ma2024medsam          | 10.1038/s41467-024-44824-z               | https://pubmed.ncbi.nlm.nih.gov/38253604                              | 2026-05-26        |
-| cosma2025             | (no DOI — arXiv preprint)                | https://arxiv.org/abs/2504.01692                                      | 2026-05-26        |
+| cama2025             | 10.1117/1.JMI.12.5.054501               | https://arxiv.org/abs/2504.01692 + https://doi.org/10.1117/1.JMI.12.5.054501 (SPIE JMI peer-reviewed) | 2026-05-27 |
 | koo2016icc            | 10.1016/j.jcm.2016.02.012                | https://pubmed.ncbi.nlm.nih.gov/27330520                              | 2026-05-26        |
 | vallat2018pingouin    | 10.21105/joss.01026                      | https://joss.theoj.org/papers/10.21105/joss.01026                     | 2026-05-26        |
 | hosmer2013            | 10.1002/9781118548387 (ISBN 9780470582473) | https://www.wiley.com/en-us/Applied+Logistic+Regression%2C+3rd+Edition-p-9780470582473 | 2026-05-26 |
