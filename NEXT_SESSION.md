@@ -80,7 +80,7 @@ The recommended order is bottom-up (smaller sections first, then the abstract la
 - **Verify fig4 regenerated correctly.** The agent flagged that `figures/fig4_stratified_auc.png` may not have been regenerated. Open it in a viewer; if it shows three paradigms instead of four, re-run `python 08_make_figures.py` and commit.
 - **`overleaf_project/figures/` sync.** Script 08 writes to `figures/` but the manuscript LaTeX expects `overleaf_project/figures/`. One-line fix: add `\graphicspath{{figures/}{overleaf_project/figures/}}` to `main.tex` preamble.
 - **Rename misleading function `to_central_axial_slice` in `04_extract_radiomics.py`** to `to_max_area_axial_slice` (the function actually selects max-area, not centroid — name is a vestige from the pre-harmonization version per decisions.log #017). ~5 min, no feature-value change expected.
-- **Revoke the leaked PAT** `github_pat_11AI3BQDQ0VQ9JzxGNqDVo_…KoWD2NTXKIwebIHqHK` at https://github.com/settings/tokens.
+- **Revoke any temporary GitHub Personal Access Token used during the initial 2026-05-26 repository push.** GitHub Credential Manager has cached fresh credentials, so subsequent pushes work silently and the temporary token is no longer needed. Token-revocation page: https://github.com/settings/tokens.
 - **Cover letter DOI insertion** per the updated OSF_FILL_GUIDE.md step 8 — add `10.17605/OSF.IO/9KT3C` to the "Pre-registration and data availability" paragraph in `overleaf_project/COVER_LETTER.md`.
 
 ## Standing protocol going forward (binding for any future BibTeX or FM-loader change)
