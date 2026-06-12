@@ -108,3 +108,15 @@ PRE_SUBMISSION_LAYOUT_TODO.md
 .placeholder
 
 Research Paper Review and Improvement.md
+
+# === AI / Cowork session working artifacts — never commit (2026-06-12) ===
+CLAUDE*.md
+*_HANDOFF_*.md
+SUBMISSION_GUIDE*.md
+AUDIT_*.md
+*heat*heet*.md
+cmig_submission/
+Interview_Prep_2026/
+Resubmission_2026/
+logs/
+*.cowork

@@ -11,7 +11,7 @@ the same authoritative URLs the verification used.
 Verification protocol (binding for any future bib edits):
 1. Every BibTeX field (year, volume, issue, pages, first-author surname,
    journal name, DOI) is sourced from one of the URLs below; no field is
-   taken from the assistant's training memory.
+   taken from memory or any unverified source.
 2. New entries added in any future revision must be appended to this log
    with the same provenance line format and date-stamped.
 3. If an entry cannot be verified against an authoritative endpoint, it is
